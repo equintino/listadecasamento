@@ -9,9 +9,7 @@
      <script>
        produto=[];
        function produtoSelecionado(produto){
-        //var php;
          var produto;
-         //alert(produto);
          var quem = prompt("Digite seu nome","Produto já presentiado");
          var ola = 'Olá ';
          if(quem != null ){
@@ -28,7 +26,9 @@
      </script>
  <?php	
   include 'bd/bd.class.php';
-   $produtos=Conexao::consulta('select * from produtos where selecionado="nao"');
+  
+   $tabela='produtos';
+   $produtos=Conexao::consulta("select * from $tabela where selecionado=\"nao\" ");
   foreach($produtos as $item){
    $ids[]=$item['id'];
    $produtos[]=$item['nome'];
@@ -56,17 +56,16 @@ $escreve =fwrite($abre, $ss);
 //// fim contador /////
  ?>
 </head>
-<body> 
-   
-    <div id="curtina"><img src="images/baloes.gif" height="600px" /></div>
+<body>   
+  <div id="curtina"><img src="images/baloes.gif" height="600px" /></div>
   <form method="post" action="giftlistIndex.aspx" onkeypress="javascript:return WebForm_FireDefaultButton(event, 'ContentPlaceHolder1_ibtSearch')" id="form1">
    <table id="tbMain" width="990" border="0" cellpadding="0" cellspacing="0" align="center">
-         <div class="abrir_presente"  onclick=produtoSelecionado(produto);>
-           <script>produto.push('$itens[$x]');</script>";
-           &nbsp
-         </div>
     <tr>
-     <td width="776" valign="top"> 
+     <td width="776" valign="top">
+      <div class="abrir_presente"  onclick=produtoSelecionado(produto);>
+       <script>produto.push('$itens[$x]');</script>
+       &nbsp
+      </div>
       <div class='alianca'>
        <img src="images/bt_lista_casamento.gif" alt="Lista de Casamento" width="131" height="15" border="0" />
        <ul id='nav'>
@@ -203,8 +202,8 @@ $escreve =fwrite($abre, $ss);
               <strong  onclick="javascript:hidediv('divMenuLevel2521')">
                <div class="menu_sub_departamento" style="cursor:pointer;">
                 <?php
-                  $itens=array('KIT EDREDOM','COLCHA DO DIA','CAMA DE CASAL','GUARDA ROUPA','COLCHAO CASAL P/ BOX','CADEIRA P/ COMPUTADOR');
-                  $links=array('http://www.extra.com.br/CamaMesaBanho/Edredom/edredomCasal/EDREDOM-CASAL-PADRAO-VERMELHO-COLOR-BLOCK-MALHA-PENTEADA-8908027.html','https://m.magazineluiza.com.br/kit-colcha-cobre-leito-casal-fenix-5-pecas-ouro-velho-a-criativa/p/0863128/cm/kenx/?utm_source=webtraffic+zoom+cpa','http://www.classeacolchoes.com.br/cama-box-casal-bipartido-bau-frontal-pistao-corino-preto-138-188/p?idsku=2005428&gclid=CjwKEAjwqdi7BRCL6Zmjk5-rsTwSJABmrVabYiSChZNZFJYUFiFSUATJIjm7k9ZWoBC3ZmGUtl4A9BoCUg3w_wcB','http://www.marabraz.com.br/guarda-roupa-alvorada-araplac.html?utm_medium=cpc','http://www.casasbahia.com.br/Moveis/Colchoes/ColchaodeCasal/Colchao-Casal-Ortobom-Physical-Spring-23X138X188cm-%E2%80%93-Branco-e-Preto-1972188.html?utm_medium=Cpc&utm_source=GP_PLA&s_kwcid=AL!427!3!95318457035!!!g!121065683067!&utm_campaign=Move_Shopping&ef_id=VuwrKQAABC7gw-ze:20160628023212:s','http://m.pontofrio.com.br/*/produto/516415/detalhe?sku=2198115');
+                  $itens=array('NOTEBOOK','KIT EDREDOM','COLCHA DO DIA','CAMA DE CASAL','GUARDA ROUPA','COLCHAO CASAL P/ BOX','CADEIRA P/ COMPUTADOR');
+                  $links=array('http://www.pontofrio.com.br/Informatica/Notebook/Notebook-Dell-Inspiron-I15-3542-C10-com-Intel-Core-i3-4005U-4GB-1TB-Gravador-de-DVD-Leitor-de-Cartoes-HDMI-Bluetooth-LED-15-6-e-Windows-10-7305574.html?recsource=wproddisp&rectype=w8','http://www.extra.com.br/CamaMesaBanho/Edredom/edredomCasal/EDREDOM-CASAL-PADRAO-VERMELHO-COLOR-BLOCK-MALHA-PENTEADA-8908027.html','https://m.magazineluiza.com.br/kit-colcha-cobre-leito-casal-fenix-5-pecas-ouro-velho-a-criativa/p/0863128/cm/kenx/?utm_source=webtraffic+zoom+cpa','http://www.classeacolchoes.com.br/cama-box-casal-bipartido-bau-frontal-pistao-corino-preto-138-188/p?idsku=2005428&gclid=CjwKEAjwqdi7BRCL6Zmjk5-rsTwSJABmrVabYiSChZNZFJYUFiFSUATJIjm7k9ZWoBC3ZmGUtl4A9BoCUg3w_wcB','http://www.marabraz.com.br/guarda-roupa-alvorada-araplac.html?utm_medium=cpc','http://www.casasbahia.com.br/Moveis/Colchoes/ColchaodeCasal/Colchao-Casal-Ortobom-Physical-Spring-23X138X188cm-%E2%80%93-Branco-e-Preto-1972188.html?utm_medium=Cpc&utm_source=GP_PLA&s_kwcid=AL!427!3!95318457035!!!g!121065683067!&utm_campaign=Move_Shopping&ef_id=VuwrKQAABC7gw-ze:20160628023212:s','http://m.pontofrio.com.br/*/produto/516415/detalhe?sku=2198115');
                   for($x=0;$x<count($itens);$x++){
                    if( in_array ($itens[$x],$produtos)){
                     echo '<a href="main.php?produto='.$itens[$x].'&link='.$links[$x].'">'.$itens[$x].'<br></a>';

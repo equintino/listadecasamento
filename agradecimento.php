@@ -7,6 +7,10 @@
 <script type="text/javascript" src="popup-window.js"></script>
     </head>
     <body onload="popup_window_show('#popup_window_id_767BA48AD43A3E3ABCA82A8EB8CB976F', { pos : 'window-left', parent : this, x : 0, y : 0, width : 'auto' }); return false;" >
+        <!-- Anchor start -->
+<!--<a href="#" onclick="popup_window_show('#popup_window_id_767BA48AD43A3E3ABCA82A8EB8CB976F', { pos : 'window-center', parent : this, x : 0, y : 0, width : 'auto' }); return false;">Open popup window</a>-->
+<!-- Anchor end -->
+
 <!-- Popup Window start -->
 <div id="popup_window_id_767BA48AD43A3E3ABCA82A8EB8CB976F" class="popup_window_css">
     <table class="popup_window_css">
@@ -17,6 +21,8 @@
                 </div>
                 <div class="popup_window_css_body">
                 </div>
+               <!-- <div class="popup_window_css_foot"><a href="http://www.php-development.ru/javascripts/popup-window.php" title="Powered by PHPDevel Popup Window | PHPDevel web scripts collection"><img src="images/about.gif" alt="" width="6" height="6" /></a>
+                </div>-->
             </td>
         </tr>
     </table>
@@ -33,19 +39,24 @@ include 'bd/bd.class.php';
 @$link=str_replace('*','#',$link);
 @$resumo=$_GET['resumo'];
 @$nome_=$_GET['nome'];
+$tabela='produtos';
+$tabela_cadastro='cadastro';
 
 $rows=Conexao::linhasBd($nome_);
 
-$sql_='SELECT * FROM produtos WHERE parcelaTotal>0';
+$sql_="SELECT * FROM $tabela WHERE parcelaTotal>0";
 $produtos_=Conexao::consulta($sql_);
 foreach($produtos_ as $item_){
  $produtos2[]=$item_['nome'];
 }
+//print_r($produtos2[0]);die;
 
  if($resumo==1){
   for($x=0;$x<count($produtos2);$x++){
-    $sql='select * from produtos INNER JOIN cadastro ON produtos.nome=cadastro.produto where cadastro.presenteador like "%'.$nome_.'%" AND cadastro.produto="'.$produtos2[$x].'"';
+    $sql="select * from $tabela INNER JOIN $tabela_cadastro ON $tabela.nome=$tabela_cadastro.produto where $tabela_cadastro.presenteador like \"%".$nome_."%\" AND $tabela_cadastro.produto=\"".$produtos2[$x]."\"";
     $consulta=Conexao::consulta($sql);
+   // print_r($sql);
+    //print_r($produtos[$x]);
   if($consulta){
     foreach($consulta as $item){
         @$descricao = $item['descricao'];
@@ -71,7 +82,9 @@ foreach($produtos_ as $item_){
        <table align=center class='agradecimento' border=1 cellspacing=0 >
         <tr><td align=right>Produto </td><td>&nbsp".@$descricao."</td></tr>
         <tr><td align=right>Link da Loja </td><td><a href=".$link." target='_blank'> >>> Ir à loja <<< </a></td></tr>
-        <tr><td align=right>Endereço de entrega </td><td>&nbspRua Antônio de Assis, 4 - Bonsucesso / RJ - CEP: 21044-020</td></tr>
+        <tr><td align=right>Endereço de entrega </td><td>Avenida Brigadeiro Trompowski, 4 - Ramos / RJ - CEP: 21044-020</td></tr>
+        <tr><td align=right>Tel: </td><td>965903940 / 3069-2405</td></tr>
+        <tr><td align=right>Contato: </td><td>Daniel / Lucas</td></tr>
        </table>
   ";
    }
@@ -95,7 +108,9 @@ foreach($produtos_ as $item_){
        <table align=center class='agradecimento' border=1 cellspacing=0 >
         <tr><td align=right>Produto </td><td>&nbsp".$descricao."</td></tr>
         <tr><td align=right>Link da Loja </td><td><a href=".$link." target='_blank'> >>> Ir à loja <<< </a></td></tr>
-        <tr><td align=right>Endereço de entrega </td><td>&nbspRua Antônio de Assis, 4 - Bonsucesso / RJ - CEP: 21044-020</td></tr>
+        <tr><td align=right>Endereço de entrega </td><td>Avenida Brigadeiro Trompowski, 4 - Ramos / RJ - CEP: 21044-020</td></tr>
+        <tr><td align=right>Tel: </td><td>965903940 / 3069-2405</td></tr>
+        <tr><td align=right>Contato: </td><td>Daniel / Lucas</td></tr>
        </table>
   ";
  }
@@ -109,3 +124,4 @@ foreach($produtos_ as $item_){
     </table>
     </body>
 </html>
+

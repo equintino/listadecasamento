@@ -2,9 +2,10 @@
 <?php
  include 'bd/bd.class.php';
  
+ $tabela='cadastro';
  $produtos=$_GET['produto'];
  $nome_=mb_strtoupper($_GET['nome']);
-    $consulta=Conexao::consulta('select * from cadastro where cadastro.presenteador like "%'.$nome_.'%" ');   
+    $consulta=Conexao::consulta("select * from $tabela where presenteador like '%".$nome_."%' ");
   if($consulta){
     header('Location: agradecimento.php?nome='.$nome_.'&produtos='.$produtos.'&resumo=1');
   }else{

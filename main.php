@@ -15,6 +15,7 @@
 <?php
     include 'bd/bd.class.php';
     
+    $tabela='produtos';
     $produto=$_GET['produto'];
     @$link=$_GET["link"];
     $link=str_replace('*','#',$link);
@@ -73,15 +74,15 @@
             Presente selecionado: <b><?= $produto ?></b><br><br>
             <img src=<?= 'images/'.$produto_.'.png'; ?> height='120px' />
             <?php 
-              $produtosDb=Conexao::consulta("select * from produtos where nome=\"$produto\"");
+              $produtosDb=Conexao::consulta("select * from $tabela where nome=\"$produto\"");
               $precoTotal=$produtosDb[0]['preco']-$produtosDb[0]['parcelaTotal'];
               $preco=$produtosDb[0]['preco'];
               $valor1=10;
-            if($produtosDb[0]['parcelaTotal'] == 0){
-              if($link){
-                echo "<a href=$link  target='_blank'>&nbsp&nbsp<img src='images/IRALOJA.png' height='20px' /></a><br><br>";
-              }
-            }
+            //if($produtosDb[0]['parcelaTotal'] == 0){
+             // if($link){
+                //echo "<a href=$link  target='_blank'>&nbsp&nbsp<img src='images/IRALOJA.png' height='20px' /></a><br><br>";
+            //  }
+            //}
               if($produto!='PRAIA DA PIPA' && $produto!='PASSEIO DE BARCO' && $produto!='PASSEIO DE QUADRICICLO' && $produto!='MESA DE 4 CADEIRAS'){
                echo '<div id="parcela">';
                if($produtosDb[0]['nome']==$produto){
@@ -191,5 +192,5 @@ Mesa Dobrável com Banqueta Mobile <b>R$ 260,00</b></font><br>';
             <input type='button' value='CANCELAR' onclick='history.go(-1)'>
             <input type='submit' value='AVANÇAR' />
         </form>
-        <p>Endereço para entrega: <b>Rua Antônio de Assis, 4 - Bonsucesso / RJ - CEP: 21044-020</b></p><br><br>
+        <p>Endereço para entrega: <b>Avenida Brigadeiro Trompowsk, 4 - Ramos / RJ - CEP: 21044-020</b></p><br><br>
     </div>

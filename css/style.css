@@ -53,19 +53,8 @@ body{
 	text-align: center;
 	font-family: Impact;	
 }
-.alianca{
-    clean: left;
-    #color: white;
-    background-color: white;
-    #position: absolute;
-    float: right;
-    height: 18px;
-    #right: 259px;
-    //opacity: 0.6;
-}
 .abrir_presente {
-    position: absolute;
-    left: 49px;
+    float: left;
     height: 20px;
     width: 160px;
     background-image: url('../images/ABRIR_PRESENTE.png');
@@ -77,6 +66,16 @@ body{
     background-repeat: no-repeat;
     height: 20px;
     width: 160px;
+}
+.alianca{
+    clean: both;
+    #color: white;
+    background-color: white;
+    #position: absolute;
+    float: right;
+    height: 18px;
+    #right: 259px;
+    //opacity: 0.6;
 }
 .tel{
     font-weight: bold;

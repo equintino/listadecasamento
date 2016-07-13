@@ -15,13 +15,11 @@
     @$link=$_POST['link'];
     $link=str_replace('#','*',$link);
     $precoTotal=$_POST['precoTotal'];
-    //print_r($_POST);die;
     
     if($act=='loja'){
      $parcela=$precoTotal;
      $completo='sim';
     }elseif($parcela==$precoTotal){
-     //$parcela=$parcelaTotal;
      $completo='sim';
     }
     
@@ -83,7 +81,6 @@
     $parcelaOld=$item['parcelaTotal'];
     $preco=$item['preco'];
     $descricao=$item['descricao'];
-    //$link=$item['link'];
     }
     $parcelaTotal=$parcelaOld+$parcela;
     if($completo=='sim'){
@@ -100,8 +97,15 @@
              ";
     $where="  
         `nome`='".$produto."'";
+      
+  /// grava acesso ao site ///
+    $agora=mktime(date("H"));
+    $data_in=mktime(date("H"));
+    $ip=getenv("REMOTE_ADDR");
+    @$result=Conexao::gravaBd($nome,$agora,$ip,$produto);
+  /// fim hrava acesso ///
     
-    $sql_="INSERT INTO `cadastro`(`id`, `presenteador`, `email`, `tel`, `valor`, `produto`,`act`,`link`) VALUES ('','".$nome."','".$email."','".$tel."','".$parcela."','".$produto."','".$act."','".$link."')";
+    $sql_="INSERT INTO `$tabela_`(`id`, `presenteador`, `email`, `tel`, `valor`, `produto`,`act`,`link`) VALUES ('','".$nome."','".$email."','".$tel."','".$parcela."','".$produto."','".$act."','".$link."')";
     if($confpresente=='sim'){
     $result=Conexao::atualizaBd($tabela,$dados,$where);
     $result_=Conexao::grava3Bd($tabela_,$sql_);
